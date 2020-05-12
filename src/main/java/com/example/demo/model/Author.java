@@ -1,31 +1,29 @@
 package com.example.demo.model;
 
-import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
-
-import java.util.UUID;
-
 public class Author {
-    private UUID id;
+    private int id;
     private String name;
     private String description;
 
     public Author(){}
 
-    public Author(UUID id, String name, String explanation) {
+    public Author(int id, String name, String description) {
         this.id = id;
         this.name = name;
-        this.description = explanation;
+        this.description = description;
     }
 
-    public Author(UUID id) {
-        this.id = id;
+    public Author(Author another) {
+        this.id = another.id;
+        this.name = another.name;
+        this.description = another.description;
     }
 
-    public UUID getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(int id) {
         this.id = id;
     }
 

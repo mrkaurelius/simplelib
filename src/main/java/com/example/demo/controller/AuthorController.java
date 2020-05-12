@@ -1,21 +1,24 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Author;
-import com.example.demo.service.AuthorService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.model.Author;
+import com.example.demo.service.AuthorService;
 
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 public class AuthorController {
-
     private final AuthorService authorService;
+    Logger logger = LoggerFactory.getLogger(AuthorController.class);
 
     // inject actual service to constructor
     @Autowired
@@ -24,39 +27,58 @@ public class AuthorController {
     }
 
     @GetMapping("/author")
-    public String authorForm(Model model) {
-        //Author dummyAuthor = new Author(UUID.randomUUID(),"Adam Smith", "Ahlak Felsefecisi");
-        model.addAttribute("author", new Author());
+    public String author(Model model) {
+        List<Author> authors = authorService.getAuthors();
+        model.addAttribute("authors", authors );
+        model.addAttribute("author", new Author() );
 
-        /*
-        System.out.println("Authors ");
-        List<Author> fakeDB = authorService.getAuthors();
-        for (int i = 0; i < fakeDB.size(); i++) {
-            System.out.println(fakeDB.get(i).toString());
-        }
-        */
 
-        return "author";
+        logger.info("/authors " + authors.toString());
+        return "/author";
     }
 
-    @PostMapping ("/editauthor")
-    public String editAuthor(@ModelAttribute Author author) {
+    // TODO how to change post without
+    @GetMapping ("/updateauthor")
+    public String update(@ModelAttribute Author author, @RequestParam String authorname) {
         // TODO: check sanity
         // fetch user from database and compare
         // have form data do thing
+        logger.info("model attr author: " + author.toString());
+        logger.info("authorname: " + authorname);
 
-        System.out.println(author.toString());
-        return "author";
+        //todo fetchauthor byname -> updateauthor !!!
+        Author oldAuthor = authorService.fetchAuthorByName(authorname);
+        if (oldAuthor == null){
+            logger.info("cant find any author" + authorname);
+            return "redirect:/author";
+        } else {
+            logger.info(oldAuthor.toString());
+        }
+        Author updatedAuthor = new Author(oldAuthor);
+        if (!author.getDescription().isEmpty() && !author.getName().isEmpty()){
+            updatedAuthor.setName(author.getName());
+            updatedAuthor.setDescription(author.getDescription());
+            authorService.updateAuthor(oldAuthor, updatedAuthor);
+            return "redirect:/author";
+        }
+
+        logger.info("no change been made");
+        return "redirect:/author";
     }
 
     @PostMapping("/addauthor")
     public String addAuthor(@ModelAttribute Author author) {
         // TODO: check sanity
         // have form data do thing
-        author.setId(UUID.randomUUID());
+        authorService.addAuthor(author);
+        return "redirect:/author";
+    }
 
-        //authorService.addAuthor(author);
-        // System.out.println(author.toString());
-        return "author";
+    @PostMapping("/deleteAuthor")
+    public String deleteAuthor(@ModelAttribute Author author) {
+        // TODO: check sanity
+        // have form data do thing
+        authorService.deleteAuthorByName(author.getName());
+        return "redirect:/author";
     }
 }

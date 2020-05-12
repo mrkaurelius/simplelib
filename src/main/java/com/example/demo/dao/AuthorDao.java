@@ -1,20 +1,21 @@
 package com.example.demo.dao;
 
 import com.example.demo.model.Author;
-import com.example.demo.service.AuthorService;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface AuthorDao {
     // add author with pregenerated id
-    int insertAuthor(UUID id, Author author);
+    int addAuthor(Author author);
+
+    int deleteAuthor(Author author);
+    int deleteAuthorByName(String authorName);
+
+    int updateAuthor(Author author, Author updatedAuthor);
+    int updateAuthorByName(String authorName, Author updatedAuthor);
+    int updateAuthorById(int id, Author updatedAuthor);
+
+    Author fetchAuthorByName(String authorName);
+
     List<Author> getAuthors();
-
-    // app author with new random id
-    default int insertAuthor(Author author){
-        UUID id = UUID.randomUUID();
-        return insertAuthor(id, author);
-    }
-
 }

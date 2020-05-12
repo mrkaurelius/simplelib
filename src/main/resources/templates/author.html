@@ -33,33 +33,56 @@
 
             <form action="#" th:action="@{/addauthor}" th:object="${author}" method="post">
                 <div class="form-group">
-                  <input type="text" th:field="*{name}" class="form-control" placeholder="Yazar Adi">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Yazar Adi" required>
                 </div>
 
                 <div class="form-group">
-                  <textarea class="form-control" th:field="*{description}"  rows="3" placeholder="Aciklama"></textarea>
+                    <textarea class="form-control" th:field="*{description}" rows="3" placeholder="Aciklama"></textarea>
                 </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Ekle</button>
                 </div>
 
-              </form>
-       
+            </form>
+
             <hr>
 
             <p>Yazar Duzenle</p>
 
 
-            <form action="#" th:action="@{/editauthor}" th:object="${author}" method="post">
+            <form action="#" th:action="@{/updateauthor}" th:object="${author}" method="get">
+                <div class="form-group">
+                    <input type="text" th:name="authorname" class="form-control" placeholder="Yazar Adi" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Yeni Yazar Adi">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" th:field="*{description}" rows="3" placeholder="Yeni Aciklama"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Duzenle</button>
+                </div>
+
+            </form>
+
+            <hr>
+
+            <p>Yazar Silme</p>
+
+            <form action="#" th:action="@{/deleteAuthor}" th:object="${author}" method="post">
                 <div class="form-row align-items-center">
 
                     <div class="col">
-                        <input type="text" th:field="*{name}" class="form-control" placeholder="Yazar Adi">
+                        <input type="text" th:field="*{name}" class="form-control" placeholder="Yazar Adi" required>
                     </div>
 
                     <div class="col-auto my-1">
-                        <button type="submit" class="btn btn-primary">Duzenle</button>
+                        <button type="submit" class="btn btn-primary">Sil</button>
                     </div>
                 </div>
             </form>
@@ -72,23 +95,20 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">Adi</th>
+                            <th scope="col" >Adi</th>
                             <th scope="col">Aciklama</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Lorem Ipsum</td>
-                            <td>Lorem Ipsum</td>
+                        <tr th:each="author : ${authors}">
+                            <td th:text="${author.name}"></td>
+                            <td th:text="${author.description}"></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
         </div>
-    </div>
-
-
     </div>
 
 
