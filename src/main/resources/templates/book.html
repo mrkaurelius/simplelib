@@ -29,23 +29,96 @@
     <div class="mt-4 container">
         <div class="jumbotron">
             <h1>Kitap</h1>
-            <a class="btn btn-primary btn-lg" href="#" role="button">Kitap Ekle</a>
+            <p>Kitap Ekle</p>
+            <form action="#" th:action="@{/addbook}" th:object="${book}" method="post">
+                <div class="form-group">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Kitap Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{ISBN}" class="form-control" placeholder="ISBN" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{subName}" class="form-control" placeholder="Alt Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{seriesName}" class="form-control" placeholder="Seri Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{authorName}" class="form-control" placeholder="Yazar Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{publisherName}" class="form-control" placeholder="Yayin Evi Adi">
+                </div>
+
+
+                <div class="form-group">
+                    <textarea class="form-control" th:field="*{description}" rows="3"
+                        placeholder="Aciklama"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+            
             <hr>
             <p>Kitap Duzenle</p>
-            <form>
+
+            <form action="#" th:action="@{/updatebook}" th:object="${book}" method="get">
+                <div class="form-group">
+                    <input type="text" th:name="bookisbn" class="form-control" placeholder="Kitap ISBN" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" th:field="*{name}" class="form-control" placeholder="Yeni Kitap Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{subName}" class="form-control" placeholder="Yeni Alt Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{seriesName}" class="form-control" placeholder="Yeni Seri Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{authorName}" class="form-control" placeholder="Yeni Yazar Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{publisherName}" class="form-control" placeholder="Yeni Yayin Evi Adi">
+                </div>
+
+                <div class="form-group">
+                    <input type="text" th:field="*{ISBN}" class="form-control" placeholder="Yeni ISBN">
+                </div>
+
+                <div class="form-group">
+                    <textarea class="form-control" th:field="*{description}" rows="3"
+                        placeholder="Yeni Aciklama"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Duzenle</button>
+                </div>
+            </form>
+
+            <hr>
+            <p>Kitap Sil</p>
+
+            <form action="#" th:action="@{/deletebook}" th:object="${book}" method="post">
                 <div class="form-row align-items-center">
-                    <div class="col-auto my-1">
-                        <select class="custom-select mr-sm-2" id="bookquerytype">
-                            <option selected>Sec...</option>
-                            <option value="1">Kitap Adi</option>
-                            <option value="2">ISBN</option>
-                        </select>
-                    </div>
+
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="ISBN yada Kitap adi secin">
+                        <input type="text" th:field="*{ISBN}" class="form-control" placeholder="Kitap ISBN" required>
                     </div>
+
                     <div class="col-auto my-1">
-                        <button type="submit" class="btn btn-primary">Duzenle</button>
+                        <button type="submit" class="btn btn-primary">Sil</button>
                     </div>
                 </div>
             </form>
@@ -68,13 +141,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
-                            <td>Lorem ipsum</td>
+                        <tr th:each="book : ${books}">
+                            <td th:text="${book.name}"></td>
+                            <td th:text="${book.subName}"></td>
+                            <td th:text="${book.seriesName}"></td>
+                            <td th:text="${book.authorName}"></td>
+                            <td th:text="${book.publisherName}"></td>
+                            <td th:text="${book.ISBN}"></td>
+                            <td th:text="${book.description}"></td>
+                        </tr>
                         </tr>
                     </tbody>
                 </table>

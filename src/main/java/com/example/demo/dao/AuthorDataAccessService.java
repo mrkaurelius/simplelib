@@ -7,12 +7,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.List;
 
-// TODO: connect postgres db
 @Repository("postgresAuthorDao")
 public class AuthorDataAccessService implements AuthorDao{
 
     NamedParameterJdbcTemplate template;
-
     public AuthorDataAccessService(NamedParameterJdbcTemplate template) {
         this.template = template;
     }
@@ -78,7 +76,6 @@ public class AuthorDataAccessService implements AuthorDao{
 
     @Override
     public Author fetchAuthorByName(String authorName) {
-
         try {
             return template.getJdbcTemplate().queryForObject("SELECT * FROM author WHERE author_name  = ? ",mapAuthor,authorName);
         } catch (Exception e) {

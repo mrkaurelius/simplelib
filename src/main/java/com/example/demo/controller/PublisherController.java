@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Author;
+import com.example.demo.model.Publisher;
 import com.example.demo.model.Publisher;
 import com.example.demo.service.PublisherService;
 import org.slf4j.Logger;
@@ -23,14 +23,12 @@ public class PublisherController {
     }
 
     @GetMapping("/publisher")
-    public String author(Model model) {
-        //List<Author> authors = authorService.getAuthors();
-        //model.addAttribute("authors", authors );
+    public String publisher(Model model) {
+        List<Publisher> publishers = publisherService.getPublishers();
+        model.addAttribute("publishers", publishers );
         model.addAttribute("publisher", new Publisher());
 
-        //todo do publisher test here
-
-        //logger.info("/publishers " + publishers.toString());
+        logger.info("/publishers " + publishers.toString());
         return "/publisher";
     }
 
@@ -40,45 +38,45 @@ public class PublisherController {
         // TODO: check sanity
         // fetch user from database and compare
         // have form data do thing
-        logger.info("model attr author: " + publisher.toString());
-        logger.info("authorname: " + publishername);
+        logger.info("model attr publisher: " + publisher.toString());
+        logger.info("publishername: " + publishername);
 
-        //todo  author -> publisher !!!
-        /*
-        Author oldAuthor = authorService.fetchAuthorByName(authorname);
-        if (oldAuthor == null){
-            logger.info("cant find any author" + authorname);
-            return "redirect:/author";
+        //todo  publisher -> publisher !!!
+        Publisher oldPublisher = publisherService.fetchPublisherByName(publishername);
+        if (oldPublisher == null){
+            logger.info("cant find any publisher" + publishername);
+            return "redirect:/publisher";
         } else {
-            logger.info(oldAuthor.toString());
+            logger.info(oldPublisher.toString());
         }
-        Author updatedAuthor = new Author(oldAuthor);
-        if (!author.getDescription().isEmpty() && !author.getName().isEmpty()){
-            updatedAuthor.setName(author.getName());
-            updatedAuthor.setDescription(author.getDescription());
-            authorService.updateAuthor(oldAuthor, updatedAuthor);
-            return "redirect:/author";
+        Publisher updatedPublisher = new Publisher(oldPublisher);
+        if (!publisher.getDescription().isEmpty() && !publisher.getName().isEmpty()){
+            updatedPublisher.setName(publisher.getName());
+            updatedPublisher.setDescription(publisher.getDescription());
+            publisherService.updatePublisher(oldPublisher, updatedPublisher);
+            return "redirect:/publisher";
         }
-        */
 
         logger.info("no change been made");
-        return "redirect:/author";
+        return "redirect:/publisher";
     }
 
     @PostMapping("/addpublisher")
-    public String addAuthor(@ModelAttribute Publisher publisher) {
+    public String addPublisher(@ModelAttribute Publisher publisher) {
         // TODO: check sanity
         // have form data do thing
-        //authorService.addAuthor(author);
+        logger.info("addpublisher");
+        publisherService.addPublisher(publisher);
         logger.info(publisher.toString());
         return "redirect:/publisher";
     }
 
     @PostMapping("/deletepublisher")
-    public String deleteAuthor(@ModelAttribute Publisher publisher) {
+    public String deletePublisher(@ModelAttribute Publisher publisher) {
         // TODO: check sanity
         // have form data do thing
-        //authorService.deleteAuthorByName(author.getName());
+        logger.info("deletepublisher");
+        publisherService.deletePublisherByName(publisher.getName());
         logger.info(publisher.toString());
         return "redirect:/publisher";
     }

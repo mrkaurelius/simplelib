@@ -32,7 +32,6 @@ public class AuthorController {
         model.addAttribute("authors", authors );
         model.addAttribute("author", new Author() );
 
-
         logger.info("/authors " + authors.toString());
         return "/author";
     }
@@ -62,7 +61,7 @@ public class AuthorController {
             return "redirect:/author";
         }
 
-        logger.info("no change been made");
+        logger.info("no change has been made");
         return "redirect:/author";
     }
 
@@ -74,7 +73,7 @@ public class AuthorController {
         return "redirect:/author";
     }
 
-    @PostMapping("/deleteAuthor")
+    @PostMapping("/deleteauthor")
     public String deleteAuthor(@ModelAttribute Author author) {
         // TODO: check sanity
         // have form data do thing

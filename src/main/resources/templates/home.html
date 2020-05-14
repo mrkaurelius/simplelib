@@ -34,20 +34,45 @@
         </div>
 
         <div class="jumbotron">
-            <h2>Arama</h2>
-            <form>
+            <h2>Sorgulama</h2>
+
+            <form action="#" th:action="@{/querybook}"  method="get">
                 <div class="form-row align-items-center">
-                    <div class="col-auto my-1">
-                        <select class="custom-select mr-sm-2" id="bookquerytype">
-                            <option selected>Sec...</option>
-                            <option value="1">Kitap Adi</option>
-                            <option value="2">Yazar</option>
-                            <option value="3">Seri adı</option>
-                            <option value="4">ISBN</option>
-                        </select>
-                    </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Kategori secin">
+                        <input type="text" th:name="bookname" class="form-control" placeholder="Kitap Adi" required>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-primary">Ara</button>
+                    </div>
+                </div>
+            </form>
+
+            <form action="#" th:action="@{/queryauthor}"  method="get">
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <input type="text" th:name="authorname" class="form-control" placeholder="Yazar Adi" required>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-primary">Ara</button>
+                    </div>
+                </div>
+            </form>
+
+            <form action="#" th:action="@{/queryseries}" method="get">
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <input type="text" th:name="seriesname" class="form-control" placeholder="Seri adı" required>
+                    </div>
+                    <div class="col-auto my-1">
+                        <button type="submit" class="btn btn-primary">Ara</button>
+                    </div>
+                </div>
+            </form>
+
+            <form action="#" th:action="@{/queryisbn}"  method="get">
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <input type="text" th:name="bookisbn" class="form-control" placeholder="Kitap ISBN" required>
                     </div>
                     <div class="col-auto my-1">
                         <button type="submit" class="btn btn-primary">Ara</button>
@@ -56,6 +81,7 @@
             </form>
 
         </div>
+
 
     </div>
 

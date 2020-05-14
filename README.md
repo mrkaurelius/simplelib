@@ -11,3 +11,8 @@ adı, yazar, yayın evi, isbn numarası, açıklama )
 - Var olan bir kayıt üzerinde değişiklik yapılabilmeli
 - Var olan kayıtlar incelebilmeli
 - Var olan bir kayıt silinebilmeli
+
+### TODO 
+- prepare how to run instructions 
+- make readme great again
+- do update tests 

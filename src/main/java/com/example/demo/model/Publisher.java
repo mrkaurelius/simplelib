@@ -14,6 +14,13 @@ public class Publisher {
     public Publisher() {
     }
 
+    public Publisher(Publisher another) {
+        this.id = another.id;
+        this.name = another.name;
+        this.description = another.description;
+    }
+
+
     public int getId() {
         return id;
     }
