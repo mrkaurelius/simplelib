@@ -1,4 +1,6 @@
--- DATABASE_URL=postgres://mrk1:qazwsxedc@localhost:5432/simplelib
+-- DATABASE_URL=postgres://mrk1:strongpassword@localhost:5432/simplelib
+-- database'i olusturmak icin bu satirin yorumunu kaldirin
+-- CREATE DATABASE simplelib;
 DROP TABLE IF EXISTS author;
 DROP TABLE IF EXISTS publisher;
 DROP TABLE IF EXISTS book;
@@ -34,7 +36,6 @@ VALUES('adam smith','iktisatci yazar');
 
 INSERT INTO author(author_name, author_description) 
 VALUES('platon','felsefeci');
-
 
 INSERT INTO publisher(publisher_name, publisher_description) 
 VALUES('is bankasi','bir bankanin yayin evi');

@@ -50,9 +50,10 @@ public class PublisherController {
             logger.info(oldPublisher.toString());
         }
         Publisher updatedPublisher = new Publisher(oldPublisher);
-        if (!publisher.getDescription().isEmpty() && !publisher.getName().isEmpty()){
+        if (!publisher.getName().isEmpty()){
             updatedPublisher.setName(publisher.getName());
-            updatedPublisher.setDescription(publisher.getDescription());
+            if (!publisher.getDescription().isEmpty())
+                updatedPublisher.setDescription(publisher.getDescription());
             publisherService.updatePublisher(oldPublisher, updatedPublisher);
             return "redirect:/publisher";
         }

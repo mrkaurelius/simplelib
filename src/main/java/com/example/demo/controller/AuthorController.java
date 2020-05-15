@@ -54,9 +54,10 @@ public class AuthorController {
             logger.info(oldAuthor.toString());
         }
         Author updatedAuthor = new Author(oldAuthor);
-        if (!author.getDescription().isEmpty() && !author.getName().isEmpty()){
+        if (!author.getName().isEmpty()){
             updatedAuthor.setName(author.getName());
-            updatedAuthor.setDescription(author.getDescription());
+            if (!author.getDescription().isEmpty())
+                updatedAuthor.setDescription(updatedAuthor.getDescription());
             authorService.updateAuthor(oldAuthor, updatedAuthor);
             return "redirect:/author";
         }
