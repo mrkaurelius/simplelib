@@ -11,9 +11,10 @@ Thymeleaf, Maven, Spring Boot ve PostgreSQL kullanarak geliştirdim. Projenin te
 ```bash
 $ git clone https://github.com/mrkaurelius/simplelib
 $ cd simplelib
-$ mvn ınstall
+$ mvn install
 ```
 #### database bağımlılıkları
+- postgres kullanıcısı ile simplelib yada istediğiniz isimde bir database oluşturun.
 - database bağımlılıkları için src/main/db/ddl_dml.sql dosyasını postgreste çalıştırmalısınız.
 - database'in bağlantı bilgilerini "target/classes/application.properties" dosyasına tanımlamalısınız.  
 
